@@ -14,5 +14,10 @@ class NoCandidato{
             return conteudo->toString();
             // implementar pra exibir todos os nos,
             //por um laco de repeticao ou recursao
+	    if(!(this==NULL)){
+  	  	return this->conteudo->toString()+ " -> " + this->next->toString();
+  	    }
+  	    else
+		return "0";
         }
 };
