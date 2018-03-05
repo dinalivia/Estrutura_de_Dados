@@ -1,18 +1,29 @@
 #include "Candidato.h"
 
-class NoCandidato{
-    public:
-        Candidato *conteudo;
-        NoCandidato *next;
 
-        NoCandidato(Candidato *c, NoCandidato *prox){
-            this ->conteudo = c;
-            this ->next = prox;
-        }
+class NoCandidato
+{
+public:
+	Candidato *conteudo;
+    NoCandidato *next;
 
-        string toString(){
-            return conteudo->toString();
-            // implementar pra exibir todos os nos,
-            //por um laco de repeticao ou recursao
-        }
+	NoCandidato();
+
+	NoCandidato(Candidato *c,NoCandidato *prox){
+		this->conteudo=c;
+    	this->next=prox;
+    }
+
+    ~NoCandidato();
+
+    string toString(){
+	   //return conteudo->toString();	
+	// se a recursiva for aqui mesmo	
+      if(!(this==NULL)){
+  	  	return this->conteudo->toString()+ " -> " +  this->next->toString();
+  	  }
+  	  else
+		return "0";
+	}
+
 };
