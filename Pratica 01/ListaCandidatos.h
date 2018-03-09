@@ -47,13 +47,38 @@ public:
 		return this->head->toString();			
 	}
     
-    bool remover(string nome, string sobrenome){
+    bool remove(string nome, string sobrenome){
 		//não testado.
-		if(this->head->conteudo->igual(nome,sobrenome)){
+		if(this->estaVazia()==true)
+			return false;
+		else if(this->head->conteudo->igual(nome,sobrenome)){
+			NoCandidato* m = NULL;
+	 		m = this->head->next;
 			this->head=NULL;
 			delete this->head;
-			this->head=this->head->next;
+			this->head=m;
+			this->size=size-1;
+			return true;
 		}
+		else{
+			NoCandidato* atual = NULL;
+	 		atual = this->head;
+	 		while(atual->next!=NULL){
+		 		if (atual->next->conteudo->igual(nome,sobrenome)){
+	 				NoCandidato* m = NULL;
+			 		m = atual->next->next;
+					atual->next=NULL;
+					delete atual->next;
+					atual->next=m;
+					this->size=size-1;
+					atual=atual->next;
+					return true;
+				}
+				atual=atual->next;
+			}
+		    return false;	
+		}
+		
 	}
 
 };
