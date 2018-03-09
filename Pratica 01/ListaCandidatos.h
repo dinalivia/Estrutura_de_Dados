@@ -25,6 +25,8 @@ public:
 		string dados;
 		getline(fcin,dados);
 		cout << "criacao da lista de candidatos de:" + dados  << endl;
+		this->head=NULL;
+		this->size=0;
 		while(getline(fcin,dados)){
     
 		Candidato c(dados);
@@ -80,5 +82,15 @@ public:
 		}
 		
 	}
+	void filtrarCandidatos(int nota){
+		NoCandidato* atual = NULL;
+		atual = this->head;
+ 		while(atual!=NULL){
+	 		if (atual->conteudo->nota<nota)
+				remove(atual->conteudo->nome,atual->conteudo->sobrenome);
+			atual=atual->next;
+		}
+	}
+	
 
 };
