@@ -91,6 +91,23 @@ public:
 			atual=atual->next;
 		}
 	}
+	void concatena(ListaCandidatos* l){
+		NoCandidato* atual = NULL;
+		atual = this->head;
+		while(atual->next!=NULL){
+			atual=atual->next;
+		}
+		NoCandidato* atual_l = NULL;
+		atual_l = l->head;
+		atual->next=atual_l;
+		this->size=size+1;
+		atual_l=atual_l->next;
+		while(atual_l!=NULL){
+			atual=atual_l;
+			atual_l=atual_l->next;
+			this->size=size+1;			
+		}
+	}
 	
 
 };
