@@ -60,7 +60,7 @@ class State {
 				novo_pos.push_back(pos[i]);
 			}
 			else
-				novo_pos[i]=pos[i]+d;
+				novo_pos.push_back(pos[i]+d);
 		}
         this->pos=novo_pos;
     }
@@ -155,7 +155,24 @@ class RushHour {
     bool free[6][6];
 
     void initFree(State* s) {
-        // A SER COMPLETADA
+		//percorrendo a lista de carros
+        for (int l=0;l<6;l++){
+			for (int m=0;m<6;m++)
+				free[l][m]=true;
+		}
+			
+        for (int i=0;i<8;i++){
+			if(horiz[i]==true){
+				for(int j=0;j<len[i];j++){
+					free[moveon[i]][s->pos[i]+j]=false;
+				}
+			}
+			else{
+				for(int k=0;k<len[i];k++){
+					free[s->pos[i]+k][moveon[i]]=false;
+				}			
+			}
+		}			
     }
 
     /*
@@ -165,7 +182,7 @@ class RushHour {
     list<State*> moves(State* s) {
         initFree(s);
         list<State*> l;
-        // A SER COMPLETADA
+        
         return l;
     }
 
@@ -190,6 +207,24 @@ class RushHour {
     void printSolution(State* s) {
         // A SER COMPLETADO
     }
+    void test2() {
+		nbcars = 8;
+		bool horiz1[] = {true, true, false, false, true, true, false, false};
+		horiz.assign(horiz1, horiz1+8);
+		int len1[] = {2,2,3,2,3,2,3,3};
+		len.assign(len1,len1+8);
+		int moveon1[] = {2,0,0,0,5,4,5,3};
+		moveon.assign(moveon1,moveon1+8);
+		int start1[] = {1,0,1,4,2,4,0,1};
+		vector<int> start(start1,start1+8);
+		State* s = new State(start);
+		initFree(s);
+		for (int i = 0; i < 6; i++){
+			for (int j = 0; j < 6; j++)
+			cout << free[i][j] << "\t";
+		cout << endl;
+		}
+	}
 
 };
 
@@ -228,6 +263,7 @@ void test1() {
 
 
 int main(){
-	test1();
+	RushHour oi;
+	oi.test2();
 	return 0;
 	}
