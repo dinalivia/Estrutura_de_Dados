@@ -161,7 +161,7 @@ class RushHour {
 				free[l][m]=true;
 		}
 			
-        for (int i=0;i<8;i++){
+        for (int i=0;i<nbcars;i++){
 			if(horiz[i]==true){
 				for(int j=0;j<len[i];j++){
 					free[moveon[i]][s->pos[i]+j]=false;
@@ -183,6 +183,27 @@ class RushHour {
         initFree(s);
         list<State*> l;
         
+        for(int i=0; i<nbcars;i++){
+			if(horiz[i]==true){
+				cout << "carro" << i << "é livre para "  << moveon[i] << "e" << s->pos[i]+len[i]+1 << endl;
+				if(free[moveon[i]][s->pos[i]+len[i]+1]==1)
+					l.push_back(new State(s, i, +1));
+				else if ((free[moveon[i]][s->pos[i]-1])==1)
+					l.push_back(new State(s, i, -1));
+				else 
+					l.push_back(new State(s,i,0));
+			}
+			else{
+				if(free[s->pos[i]+len[i]][moveon[i]]==1)
+					l.push_back(new State(s, i, +1));
+				else if (free[s->pos[i]-1][moveon[i]]==1)
+					l.push_back(new State(s, i, -1));
+				else 
+					l.push_back(new State(s,i,0));
+			}
+		}
+        
+        l.push_back(s);
         return l;
     }
 
@@ -225,6 +246,29 @@ class RushHour {
 		cout << endl;
 		}
 	}
+	
+	void test3(){
+		nbcars = 12;
+		bool horiz1[] = {true, false, true, false, false, true, false, true,
+		false, true, false, true};
+		horiz.assign(horiz1, horiz1+nbcars);
+		int len1[] = {2,2,3,2,3,2,2,2,2,2,2,3};
+		len.assign(len1,len1+12);
+		int moveon1[] = {2,2,0,0,3,1,1,3,0,4,5,5};
+		moveon.assign(moveon1,moveon1+nbcars);
+		int start1[] = {1,0,3,1,1,4,3,4,4,2,4,1};
+		vector<int> start(start1,start1+nbcars);
+		State* s = new State(start);
+		int start02[] = {1,0,3,1,1,4,3,4,4,2,4,2};
+		vector<int> start2(start02,start02+nbcars);
+		State* s2 = new State(start2);
+		int n = 0;
+		for (list<State*> L = moves(s); !L.empty(); n++) L.pop_front();
+		cout << n << endl;
+		n = 0;
+		for (list<State*> L = moves(s2); !L.empty(); n++) L.pop_front();
+		cout << n << endl;
+	}
 
 };
 
@@ -265,5 +309,6 @@ void test1() {
 int main(){
 	RushHour oi;
 	oi.test2();
+	oi.test3();
 	return 0;
 	}
