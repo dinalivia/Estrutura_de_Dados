@@ -185,25 +185,23 @@ class RushHour {
         
         for(int i=0; i<nbcars;i++){
 			if(horiz[i]==true){
-				cout << "carro" << i << "é livre para "  << moveon[i] << "e" << s->pos[i]+len[i]+1 << endl;
-				if(free[moveon[i]][s->pos[i]+len[i]+1]==1)
+				if((free[moveon[i]][s->pos[i]+len[i]]==1) && s->pos[i]+len[i]<=5 ){
 					l.push_back(new State(s, i, +1));
-				else if ((free[moveon[i]][s->pos[i]-1])==1)
+				}
+				if (((free[moveon[i]][s->pos[i]-1])==1) && s->pos[i]-1>=0 ){
 					l.push_back(new State(s, i, -1));
-				else 
-					l.push_back(new State(s,i,0));
+				}
 			}
 			else{
-				if(free[s->pos[i]+len[i]][moveon[i]]==1)
+				if((free[s->pos[i]+len[i]][moveon[i]]==1) && s->pos[i]+len[i]<=5){
 					l.push_back(new State(s, i, +1));
-				else if (free[s->pos[i]-1][moveon[i]]==1)
+				}	
+				if ((free[s->pos[i]-1][moveon[i]]==1) && s->pos[i]-1>=0){
 					l.push_back(new State(s, i, -1));
-				else 
-					l.push_back(new State(s,i,0));
+				}
 			}
 		}
         
-        l.push_back(s);
         return l;
     }
 
@@ -291,7 +289,7 @@ void test1() {
 	s = new State(s,6,-1);
 	
 	cout << s->equals(s0) << endl;
-	
+
 	s = new State(s0,1,1);
 	s = new State(s,2,-1);
 	s = new State(s,3,-1);
@@ -308,7 +306,7 @@ void test1() {
 
 int main(){
 	RushHour oi;
-	oi.test2();
+	//oi.test2();
 	oi.test3();
 	return 0;
 	}
