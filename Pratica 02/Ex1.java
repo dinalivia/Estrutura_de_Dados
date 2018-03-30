@@ -5,11 +5,49 @@ class Mergesort {
 
     static void split(LinkedList<Integer> l, LinkedList<Integer> l1, LinkedList<Integer> l2) {
         // a ser completada
+        int tamanho = l.size();
+        int meio = (l.size())/2;
+        
+        for (int i=0; i<meio; i++){
+            l1.add(l.get(i));
+        }
+        for (int i=meio; i<tamanho; i++){
+            l2.add(l.get(i));
+        }
+        
+                
     }
 
     static LinkedList<Integer> merge(LinkedList<Integer> l1,
                                      LinkedList<Integer> l2) {
-        return null; // a ser completada
+        LinkedList<Integer> lmerged = new LinkedList<>();
+        int tamanho = l1.size() + l2.size();
+        int meio = l1.size() - 1;
+        int fim = l2.size() - 1;
+        int p1 = 0;
+        int p2 = 0;
+        for (int i=0; i<tamanho; i++){
+            if ((p1 <= meio) && (p2 <= fim)){
+                if (l1.get(p1) < l2.get(p2)){
+                    lmerged.add(i,l1.get(p1));
+                    p1++;
+                } else {
+                    lmerged.add(i,l2.get(p2));
+                    p2++;
+                }
+            } else {
+                if (p1 <= meio){
+                    lmerged.add(i,l1.get(p1));
+                    p1++;
+                } else {
+                    lmerged.add(i,l2.get(p2));
+                    p2++;
+                }
+            }
+        }
+            
+        
+        return lmerged;
     }
 
     static LinkedList<Integer> mergesort(LinkedList<Integer> l) {
@@ -22,7 +60,7 @@ class Mergesort {
 			return merge(l1,l2);
     	}
     	else{
-        	return null; // a ser completada
+        	return l; // a ser completada
        }
     }
 }
