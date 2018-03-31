@@ -262,9 +262,9 @@ class RushHour {
 			}
 			else{
 				if (u->d==1)
-					cout << "veículo " << color[u->c] << " para cima" << endl;
-				else 
 					cout << "veículo " << color[u->c] << " para baixo" << endl;
+				else 
+					cout << "veículo " << color[u->c] << " para cima" << endl;
 			}
 			solucao.pop_back();
 		}
@@ -421,6 +421,6 @@ void test1() {
 
 int main(){
 	RushHour oi;
-	oi.solve40();
+	oi.solve1();
 	return 0;
 	}
