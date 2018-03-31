@@ -240,6 +240,34 @@ class RushHour {
   
     void printSolution(State* s) {
         // A SER COMPLETADO
+        //o ultimo item retornado ou seja o s retornado pela função solve é a posição solução, seria o último movimento
+        //como cada s carrega as posições anteriores a eles, podemos recupera-las fazendo s->prev
+        
+        vector<State*> solucao;
+        nbMoves=0;
+        while (s->prev != NULL){
+			solucao.push_back(s);
+			s=s->prev;
+			nbMoves++;
+		}
+		cout << nbMoves << " deslocamentos"<< endl; 
+		State* u;
+		while (solucao.size()>0){
+			u=solucao.back();
+			if(horiz[u->c]==true){
+				if (u->d==1)
+					cout << "veículo " << color[u->c] << " para a direita" << endl;
+				else 
+					cout << "veículo " << color[u->c] << " para a esquerda" << endl;
+			}
+			else{
+				if (u->d==1)
+					cout << "veículo " << color[u->c] << " para baixo" << endl;
+				else 
+					cout << "veículo " << color[u->c] << " para cima" << endl;
+			}
+			solucao.pop_back();
+		}
     }
     void test2() {
 		nbcars = 8;
@@ -300,6 +328,60 @@ class RushHour {
 		for (s = solve(s); s->prev != NULL ; s = s->prev) n++;
 		cout << n << endl;
 	}
+	
+	void solve22() {
+		nbcars = 12;
+		string color1[] = {"vermelho","verde claro","amarelo","laranja",
+		"violeta claro","azul ceu","rosa","violeta","verde","preto","bege","azul"};
+		color.assign(color1, color1+nbcars);
+		bool horiz1[] = {true, false, true, false, false, true, false,
+		true, false, true, false, true};
+		horiz.assign(horiz1, horiz1+nbcars);
+		int len1[] = {2,2,3,2,3,2,2,2,2,2,2,3};
+		len.assign(len1,len1+nbcars);
+		int moveon1[] = {2,2,0,0,3,1,1,3,0,4,5,5};
+		moveon.assign(moveon1,moveon1+nbcars);
+		int start1[] = {1,0,3,1,1,4,3,4,4,2,4,1};
+		vector<int> start(start1,start1+nbcars);
+		State* s = new State(start);
+		s = solve(s);
+		printSolution(s);
+	}
+	void solve1() {
+		nbcars = 8;
+		string color1[] = {"vermelho","verde claro","violeta",
+		"laranja","verde","azul ceu","amarelo","azul"};
+		color.assign(color1, color1+nbcars);
+		bool horiz1[] = {true, true, false, false, true,
+		true, false, false};
+		horiz.assign(horiz1, horiz1+nbcars);
+		int len1[] = {2,2,3,2,3,2,3,3};
+		len.assign(len1,len1+nbcars);
+		int moveon1[] = {2,0,0,0,5,4,5,3};
+		moveon.assign(moveon1,moveon1+nbcars);
+		int start1[] = {1,0,1,4,2,4,0,1};
+		vector<int> start(start1,start1+nbcars);
+		State* s = new State(start);
+		s = solve(s);
+		printSolution(s);
+	}
+	void solve40() {
+		nbcars = 13;
+		string color1[] = {"vermelho","amarelo","verde claro","laranja","azul claro",
+		"rosa","violeta claro","azul","violeta","verde","preto","bege","amarelo claro"};
+		color.assign(color1, color1+nbcars);
+		bool horiz1[] = {true, false, true, false, false, false, false,
+		true, false, false, true, true, true};
+		horiz.assign(horiz1, horiz1+nbcars);
+		int len1[] = {2,3,2,2,2,2,3,3,2,2,2,2,2};len.assign(len1,len1+nbcars);
+		int moveon1[] = {2,0,0,4,1,2,5,3,3,2,4,5,5};
+		moveon.assign(moveon1,moveon1+nbcars);
+		int start1[] = {3,0,1,0,1,1,1,0,3,4,4,0,3};
+		vector<int> start(start1,start1+nbcars);
+		State* s = new State(start);
+		s = solve(s);
+		printSolution(s);
+	}
 
 };
 
@@ -339,6 +421,6 @@ void test1() {
 
 int main(){
 	RushHour oi;
-	oi.test4();
+	oi.solve1();
 	return 0;
 	}
