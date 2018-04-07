@@ -12,10 +12,14 @@ public class Operacao{
 	}
 	public Operacao(double a){
 		this.a=a;
-		
+		this.code='e';		
 	}
 	public String toString(){
-		//falta completar
+		if(this.code=='e'){
+			return Double.toString(this.a);
+		}
+		else 
+			return String.valueOf(this.code);
 	}
 
 	public static void main (String[] args) {

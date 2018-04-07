@@ -5,36 +5,39 @@ public class CalcRPN {
 	// uma pilha para os cálculos
 	Pilha<Double> aPilha;
 	//pilha do histórico
-	//Pilha<Operacao> hist;
+	Pilha<Operacao> hist;
 	// construtor
 	CalcRPN () {
 		aPilha = new Pilha();
-		//hist = new Pilha();
+		hist = new Pilha();
 	}
 	// Adiçao de dois elementos do topo da pilha
 	void mais() {
 		double a=aPilha.desempilha();
 		double b=aPilha.desempilha();
 		aPilha.empilha(b+a);
-		//hist.empilha(new Operacao(a,b,'+'));
+		hist.empilha(new Operacao('+',a,b));
 	}
 	// Subtraçao de dois elementos do topo da pilha
 	void menos() {
 		double a=aPilha.desempilha();
 		double b=aPilha.desempilha();
 		aPilha.empilha(b-a);
+		hist.empilha(new Operacao('-',a,b));
 	}
 	// Multiplicaçao de dois elementos do topo da pilha
 	void vezes() {
 	 	double a=aPilha.desempilha();
 		double b=aPilha.desempilha();
 		aPilha.empilha(b*a);
+		hist.empilha(new Operacao('*',a,b));
 	}
 	// Divisao de dois elementos no topo da pilha
 	void dividido() {
 		double a=aPilha.desempilha();
 		double b=aPilha.desempilha();
 		aPilha.empilha(b/a);
+		hist.empilha(new Operacao('/',a,b));
 	}
 	// retorna o conteudo do topo da pilha
 	Double resultado() {
@@ -52,12 +55,18 @@ public class CalcRPN {
 			menos();
 		else if (cmd.equals("/"))
 			dividido();
-		else if (cmd.equals("clear"))
+		else if (cmd.equals("clear")){
 			aPilha.reinicialize();
+			hist.reinicialize();
+		}
+		else if(cmd.equals("hist")){
+			System.out.println("Historico = " + hist.toStringInverse());
+		}
 		else{
 			double numero; 
 			numero= Double.parseDouble(cmd);
 			aPilha.empilha(numero);
+			hist.empilha(new Operacao(numero));
 		}
 
 	}

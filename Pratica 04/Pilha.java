@@ -47,6 +47,22 @@ public class Pilha<T> {
 		return conteudo.toString();
 	}
 
+	public String toStringInverse(){
+		Pilha temp = new Pilha();
+		String retorno=""; 
+		for (int i=0; i<conteudo.size();i++){
+			if (i==0)
+				temp.conteudo.addFirst(conteudo.get(i));
+			else 
+				temp.conteudo.addFirst(conteudo.get(i)+", ");
+		}
+		while(!temp.estaVazia()){
+			retorno+=temp.desempilha();
+		}
+		retorno = "["+retorno+"]";
+		return retorno;
+	}
+
 	static void test1() {
 		Pilha<Double> aPilha = new Pilha<Double>();
 		System.out.println(aPilha);
