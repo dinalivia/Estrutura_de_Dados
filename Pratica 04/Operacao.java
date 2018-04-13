@@ -12,13 +12,22 @@ public class Operacao{
 	}
 	public Operacao(double a){
 		this.a=a;
-		this.code='e';		
+		this.code='e';
+	}
+	public char getCode(){
+		return code;
+	}
+	public double getA(){
+		return a;
+	}
+	public double getB(){
+		return b;
 	}
 	public String toString(){
 		if(this.code=='e'){
 			return Double.toString(this.a);
 		}
-		else 
+		else
 			return String.valueOf(this.code);
 	}
 

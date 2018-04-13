@@ -62,15 +62,28 @@ public class CalcRPN {
 		else if(cmd.equals("hist")){
 			System.out.println("Historico = " + hist.toStringInverse());
 		}
+		else if(cmd.equals("undo")){
+			cancela();
+			System.out.println("Historico = " + hist.toStringInverse());
+		}
 		else{
-			double numero; 
+			double numero;
 			numero= Double.parseDouble(cmd);
 			aPilha.empilha(numero);
 			hist.empilha(new Operacao(numero));
 		}
 
 	}
-	void undo(){
+	void cancela(){
+		Operacao ultima = hist.desempilha();
+		if(ultima.getCode()=='e'){ 
+			aPilha.desempilha();
+		}
+		else{
+			aPilha.desempilha();
+			aPilha.empilha(ultima.getB());
+			aPilha.empilha(ultima.getA());
+		}
 
 	}
 
