@@ -1,4 +1,5 @@
 package calculadora;
+import java.io.*;
 import java.util.LinkedList;
 /**
  *
@@ -21,20 +22,24 @@ public class Pilha<T>{
 
         public T desempilha(){
             if(estaVazia()){
-                throw new Error("Tá vazia");
+                throw new Error("TÃ¡ vazia");
             }
             return conteudo.removeFirst();
         }
 
         public T topo(){
             if(estaVazia()){
-                throw new Error("Tá vazia");
+                throw new Error("TÃ¡ vazia");
             }
             return conteudo.getFirst();
         }
         
         public String toString(){
             return conteudo.toString();
+        }
+        
+        public void reinicialize(){
+            conteudo.clear();
         }
         
         
@@ -123,10 +128,24 @@ public class Pilha<T>{
         calc.vezes();
         System.out.println(calc.resultado());
     }
+    
+    static void interfaceUsuario() throws IOException {
+        CalcRPN calc = new CalcRPN() ;
+        String line;
+        BufferedReader reader = new BufferedReader(new InputStreamReader (System.in));
+        while((line = reader.readLine()) != null) {
+        if (line.isEmpty())
+        continue;
+        for (String s : line.split(" "))
+        calc.exec(s);
+        System.out.println("Pilha = " + calc.aPilha);
+        }
+        System.out.println("At´e logo");
+    }
 
     
-    public static void main(String[] args) {
-        test();
+    public static void main (String[] args) throws IOException{
+        interfaceUsuario();
     }
 }
 
