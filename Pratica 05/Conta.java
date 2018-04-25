@@ -11,6 +11,7 @@ public class Conta{
       this.agencia=agencia;
       this.numero=numero;
       this.senha=senha;
+      this.md5=SecurityProvider.md5ToServer(this);
   }
 
   public Conta(String agencia, String numero, String senha,
@@ -20,11 +21,13 @@ public class Conta{
       this.senha=senha;
       this.saldo=saldo;
       this.nomeCliente=nomeCliente;
+      this.md5=SecurityProvider.md5ToServer(this);
   }
 
   public Conta(String nomeCliente,String saldo){
     this.saldo=saldo;
     this.nomeCliente=nomeCliente;
+    this.md5=SecurityProvider.md5ToServer(this);
   }
   public String getNomeCliente(){
     return this.nomeCliente;
@@ -65,12 +68,12 @@ public class Conta{
 
   public String toString(){
       String retorno;
-      retorno = "AGENCIA: " + this.agencia;
-      retorno +="CONTA: " + this.numero;
-      retorno +="SENHA: " + this.senha;
-      retorno +="NOME CLIENTE: "+ this.nomeCliente;
-      retorno +="SALDO: " + this.saldo;
-      retorno +="MD5: " +this.md5;
+      retorno = "AGENCIA: " + this.agencia +"\n";
+      retorno +="CONTA: " + this.numero+"\n";
+      retorno +="SENHA: " + this.senha+"\n";
+      retorno +="NOME CLIENTE: "+ this.nomeCliente+"\n";
+      retorno +="SALDO: " + this.saldo+"\n";
+      retorno +="MD5: " +this.md5+"\n";
       return retorno;
 
   }
@@ -85,8 +88,8 @@ public class Conta{
   }
 
 
-public static void main(String[] args) {
-		test();
-}
+	public static void main(String[] args) {
+			test();
+	}
 
 }
