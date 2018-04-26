@@ -32,7 +32,7 @@ public class Conta{
   public String getNomeCliente(){
     return this.nomeCliente;
   }
-  public String getSalto(){
+  public String getSaldo(){
     return this.saldo;
   }
   public String getAgencia(){
@@ -50,16 +50,16 @@ public class Conta{
   public void setNomeCliente(String nome){
     this.nomeCliente=nome;
   }
-  public void getSalto(String saldo){
+  public void setSalto(String saldo){
     this.saldo=saldo;
   }
-  public void getAgencia(String agencia){
+  public void setAgencia(String agencia){
     this.agencia=agencia;
   }
-  public void getNumero(String numero){
+  public void setNumero(String numero){
     this.numero=numero;
   }
-  public void getSenha(String senha){
+  public void setSenha(String senha){
    this.senha=senha;
   }
   public void setMd5(String md5){
