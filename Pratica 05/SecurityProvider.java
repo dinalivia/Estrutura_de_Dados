@@ -38,7 +38,9 @@ public class SecurityProvider
 	}
 	public static String[] md5ToClient(Conta conta)
 	{
-		String toCrypt = conta.getNomeCliente()+" "+conta.getSaldo();
+		//String toCrypt = conta.getNomeCliente()+" "+conta.getSaldo();
+		//testando para segunda função
+		String toCrypt = conta.getSaldo()+" "+conta.getNomeCliente();
 		String[] retorno = new String[ toCrypt.length()];
 		for (int i=0; i<toCrypt.length();i++){
 				retorno[i]= md5(toCrypt.substring(i,i+1));

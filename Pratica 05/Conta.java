@@ -27,7 +27,7 @@ public class Conta{
   public Conta(String nomeCliente,String saldo){
     this.saldo=saldo;
     this.nomeCliente=nomeCliente;
-    this.md5=SecurityProvider.md5ToServer(this);
+    this.md5=null;
   }
   public String getNomeCliente(){
     return this.nomeCliente;

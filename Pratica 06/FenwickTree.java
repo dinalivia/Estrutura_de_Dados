@@ -52,27 +52,33 @@ public class FenwickTree{
 			this.right.increment(i - this.leftsize,delta);
 		}
 	}
+	public int prefixSum(int upto){
+		if (left == null) {
+			if(upto!=0){
+				return this.value;
+			}
+			else
+				return 0;
+		}
+		else if(this.leftsize<=upto){
+				return this.left.value + this.right.prefixSum(upto-this.leftsize);
+		}
+		else{
+				return this.left.prefixSum(upto);
+		}
+	}
 
 	public static void main(String[] args){
 		// teste de correcao
+		// teste de correcao
 		System.out.println("Verificacao de correcao da funcao...");
-		FenwickTree T = new FenwickTree(3,
-		new FenwickTree(1, new FenwickTree(0),
-		new FenwickTree(1, new FenwickTree(0), new FenwickTree(0))),
-		new FenwickTree(1, new FenwickTree(0),
-		new FenwickTree(1, new FenwickTree(0), new FenwickTree(0))));
+		FenwickTree T = new FenwickTree(3, new FenwickTree(1, new FenwickTree(4),
+		new FenwickTree(1, new FenwickTree(2), new FenwickTree(5))),
+		new FenwickTree(1, new FenwickTree(3),
+		new FenwickTree(1, new FenwickTree(6), new FenwickTree(1))));
 		System.out.println("Arvore this : " + T);
-		T.increment(0, 4);
-		System.out.println("Resultado de increment(0, 4) : " + T);
-		T.increment(1, 2);
-		System.out.println("Resultado de increment(1, 2) : " + T);
-		T.increment(2, 5);
-		System.out.println("Resultado de increment(2, 5) : " + T);
-		T.increment(3, 3);
-		System.out.println("Resultado de increment(3, 3) : " + T);
-		T.increment(4, 6);
-		System.out.println("Resultado de increment(4, 6) : " + T);
-		T.increment(5, 1);
-		System.out.println("Resultado de increment(5, 1) : " + T);
+		System.out.println("Soma das primeiras folhas : ");
+		for(int upto = 0; upto <= 6; upto++)
+		System.out.println("prefixSum(" + upto + ") : " + T.prefixSum(upto));
 	}
 }

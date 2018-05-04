@@ -27,12 +27,22 @@ public class Database
   }
   public static Conta getConta(String[] letras){
     String nome="";
+    String saldo="";
+    boolean espaço=false;
     for(int i=0;i<letras.length;i++){
       Letra ll = Database.getLetra(letras[i]);
-      nome+=ll.getCaractere();
-    }
-    //não sei diferenciar nome e saldo para criar a conta e retornar!
-    return null;
+      if(ll.getCaractere()==" "){
+      	espaço=true;
+      }
+      if(espaço){
+      	nome+=ll.getCaractere();
+      }
+      else{
+      	saldo+=ll.getCaractere();
+      }
+     }
+    Conta retorno = new Conta(nome,saldo);
+    return retorno;
   }
   public static void test5()
   {
